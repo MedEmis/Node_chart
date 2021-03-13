@@ -58,17 +58,20 @@ body {
 	color: #323a44;
 }
 .chart-box__title_info {
-	width: 16px;
-	height: 16px;
+	width: 20px;
+	height: 20px;
 	background: var(--grey);
 	border-radius: 50%;
 	margin-left: 15px;
-	line-height: 16px;
 	font-size: 12px;
-	border: solid 1px #000;
-	box-shadow: var(--grey) 0px 0px 0px 4px;
+	/* border: solid 1px #000; */
+	/* box-shadow: var(--grey) 0px 0px 0px 4px; */
 	cursor: pointer;
 	position: relative;
+	background-image: url("https://img.icons8.com/android/24/000000/info.png");
+	background-size: 60%;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 .chart-box__title_info::after {
 	content: "some hint";
@@ -100,12 +103,15 @@ body {
 	padding: 15px;
 	border-radius: 6px;
 	border: none;
-	background: center / cover url("https://img.icons8.com/fluent-systems-regular/50/000000/settings.png");
 	background-color: var(--grey);
+	background-image: url("https://img.icons8.com/fluent-systems-regular/50/000000/settings.png");
+	background-size: 60%;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 .chart-box__body {
-	width: 100%;
+	width: auto;
 	height: 88%;
 	display: flex;
 	justify-content: flex-start;
@@ -116,7 +122,8 @@ body {
 }
 
 .bar {
-	width: 80px;
+	min-width: 80px;
+	max-width: 80px;
 	height: 400px;
 	position: relative;
 	margin-right: 80px;
@@ -159,9 +166,17 @@ body {
 	background-color: var(--grey);
 	border-radius: 50%;
 	margin-bottom: 10px;
+	background-image: url("https://img.icons8.com/ios/50/000000/send-letter--v1.png");
+	background-size: 50%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.up {
+	transform: rotate(0deg);
 }
 
 .down {
+	transform: rotate(-180deg);
 }
 
 .bar__body_arrow__percentage {
