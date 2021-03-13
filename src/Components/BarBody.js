@@ -12,7 +12,7 @@ const BarBody = ({ percent, type, label, direction }) => {
 	return (
 		<div className="bar">
 			<div className={"bar__body " + type} style={{ height: percent * 4 }}>
-				<label className="bar__body_label" >{label}</label>
+				<label className="bar__body_label" >{label} Terms and conditions</label>
 				<div className="bar__body_arrow" >
 					<div className={arrowDirection} />
 					<div className="bar__body_arrow__percentage ">{direction}%</div>
