@@ -1,38 +1,177 @@
+:root {
+	--background: #ecf2ff;
+	--chartBG: white;
+	--basic: #d7ebff;
+	--service: #d4eeea;
+	--grey: #f2f2f2;
+}
+
+body {
+	outline: none;
+	border: none;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background: var(--background);
+}
+
 .App {
-  text-align: center;
+	text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.chart-box {
+	width: 990px;
+	height: 585px;
+	background: var(--chartBG);
+	border: solid 1px #ecf2ff;
+	border-radius: 10px;
+	position: relative;
+	overflow: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.chart-box__title {
+	border-bottom: solid 1px #ecf2ff;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.chart-box__title_column {
+	width: auto;
+	display: flex;
+	height: 50%;
 }
 
-.App-link {
-  color: #61dafb;
+.chart-box__title_name {
+	font-family: Rubik;
+	font-size: 18px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: #323a44;
+}
+.chart-box__title_info {
+	width: 16px;
+	height: 16px;
+	background: var(--grey);
+	border-radius: 50%;
+	margin-left: 15px;
+	line-height: 16px;
+	font-size: 12px;
+	border: solid 1px #000;
+	box-shadow: var(--grey) 0px 0px 0px 4px;
+	cursor: pointer;
+	position: relative;
+}
+.chart-box__title_info::after {
+	content: "some hint";
+	position: absolute;
+	left: 10px;
+	top: -20px;
+	height: 20px;
+	width: 100px;
+	background: var(--grey);
+	visibility: hidden;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.chart-box__title_branch {
+	width: 121px;
+	height: 30px;
+	padding: 8px 10px;
+	border-radius: 6px;
+	background-color: var(--grey);
+	border: none;
+	font-family: Rubik;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.chart-box__title_settings {
+	width: 30px;
+	height: 30px;
+	margin: 0 0 0 15px;
+	padding: 15px;
+	border-radius: 6px;
+	border: none;
+	background: center / cover url("https://img.icons8.com/fluent-systems-regular/50/000000/settings.png");
+	background-color: var(--grey);
+}
+
+.chart-box__body {
+	width: 100%;
+	height: 88%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 40px;
+	overflow-x: auto;
+	box-sizing: border-box;
+}
+
+.bar {
+	width: 80px;
+	height: 400px;
+	position: relative;
+	margin-right: 80px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.bar__body {
+	width: 100%;
+	height: 90%;
+	border-radius: 10px;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.basic {
+	background: var(--basic);
+}
+.service {
+	background: var(--service);
+}
+
+.bar__body_label {
+	transform: rotate(-90deg);
+}
+.bar__body_arrow {
+	position: absolute;
+	right: -40px;
+	top: 50%;
+	transform: translate(50%, -50%);
+}
+
+.bar__body_arrow__direction {
+	width: 50px;
+	height: 50px;
+	background-color: var(--grey);
+	border-radius: 50%;
+	margin-bottom: 10px;
+}
+
+.down {
+}
+
+.bar__body_arrow__percentage {
+}
+
+.bar__persent {
+	width: 100%;
+	height: 22px;
+	margin-top: 20px;
+	font-family: Rubik;
+	font-size: 18px;
+	font-weight: 500;
 }
