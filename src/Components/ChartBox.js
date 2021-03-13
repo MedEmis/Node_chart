@@ -3,10 +3,6 @@ import BarBody from './BarBody'
 
 const ChartBox = ({ node_data }) => {
 
-
-
-	console.log(Array.from(node_data))
-
 	return (
 		<div className="chart-box">
 			<section className="chart-box__title">

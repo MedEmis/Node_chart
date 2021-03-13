@@ -64,8 +64,6 @@ body {
 	border-radius: 50%;
 	margin-left: 15px;
 	font-size: 12px;
-	/* border: solid 1px #000; */
-	/* box-shadow: var(--grey) 0px 0px 0px 4px; */
 	cursor: pointer;
 	position: relative;
 	background-image: url("https://img.icons8.com/android/24/000000/info.png");
