@@ -94,6 +94,32 @@ body {
 	font-size: 12px;
 	font-weight: normal;
 	cursor: pointer;
+	position: relative;
+}
+
+.node-dropdown {
+	position: absolute;
+	width: 100%;
+	height: 0;
+	max-height: 300px;
+	left: 0;
+	top: 25px;
+	overflow: hidden;
+	background: rgb(247, 244, 244);
+	transition: 0.3s all linear;
+}
+
+.active {
+	height: auto;
+}
+
+.node-dropdown p {
+	padding: 5px;
+	margin: 0;
+}
+
+.node-dropdown p:hover {
+	background: rgb(204, 202, 202);
 }
 
 .chart-box__title_settings {
@@ -117,7 +143,7 @@ body {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-	padding: 40px;
+	padding: 20px 60px 60px 40px;
 	overflow-x: auto;
 	box-sizing: border-box;
 }

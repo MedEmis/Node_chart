@@ -1,55 +1,37 @@
-import React, { useEffect, useState } from 'react'
+import React, { forwardRef, useEffect, useRef, useState } from 'react'
 import BarBody from './BarBody'
+import { useChildren } from './../Hooks/useChildren';
+
+
+const Dropdown = forwardRef(({ options, handler }, ref) => {
+	return (
+		<div ref={ref} className="node-dropdown">
+			{
+				options.map((item, index) => <p key={item} onClick={(e) => handler(e.target.innerText)}>{item}</p>)
+			}
+		</div>
+	)
+})
+
 
 const ChartBox = ({ node_data }) => {
 
-	const [nodeTree, setNodeTree] = useState([]);
+	const [options, setOptions] = useState([]);
+	const [chosenNode, setChosenNode] = useState(options[0]);
 
-	const objectConvert = (inputObject) => {
-		let outputObject = []
+	const dropdown = useRef(null)
 
-		//all object keys we've got
-		const keysArray = Object.keys(inputObject)
+	const getOptions = (object) => setOptions(Object.keys(object))
 
-		//pushing all keys-as-object to iteratable outputObject 
-		keysArray.forEach(node => {
-			outputObject.push(inputObject[node])
-		})
+	const dropdownOpen = () => dropdown.current.classList.toggle("active")
 
-		const objectRebuild = (nodeObject) => {
+	const dropdownHandler = (node) => setChosenNode(node)
 
-			//if node has nested subnodes => getting it by key from inputObject
-			if (nodeObject.hasOwnProperty("adjList") && nodeObject.adjList.length) {
-
-				for (let i = 0; i < nodeObject.adjList.length; i++) {
-
-					const key = nodeObject.adjList[i];
-					//replacing "key" with {object}
-					nodeObject.adjList[i] = inputObject[key]
-
-					//and for same object with same keys, but from outputObject => marking it with "toDelete" property, to filter it out later
-					const indexToRemove = outputObject.findIndex(obj => obj.label === inputObject[key].label);
-					outputObject[indexToRemove].toDelete = true
-				}
-			}
-		}
-
-		//checking all object for nested sub nodes
-		for (let i = 0; i < outputObject.length; i++) {
-			const node = outputObject[i];
-			objectRebuild(node)
-		}
-
-		setNodeTree(outputObject.filter(obj => !obj.hasOwnProperty("toDelete")))
-	}
-
-	console.log(nodeTree)
+	const chartTree = useChildren(node_data, chosenNode)
 
 	useEffect(() => {
-		objectConvert(node_data)
+		getOptions(node_data)
 	}, [node_data])
-
-
 
 
 	return (
@@ -61,72 +43,26 @@ const ChartBox = ({ node_data }) => {
 					<div className="chart-box__title_info" />
 				</div>
 				<div className="chart-box__title_column">
-					<button className="chart-box__title_branch">Choose branches</button>
+					<button className="chart-box__title_branch" onClick={dropdownOpen}>
+						Choose branches
+						<Dropdown options={options} handler={dropdownHandler} ref={dropdown} />
+					</button>
 					<button className="chart-box__title_settings"></button>
 				</div>
 			</section>
 
 			<section className="chart-box__body">
-				<BarBody
-					percent={100}
-					type={"basic"}
-					label={"Label"}
-					direction={-25.4}
-				/>
-				<BarBody
-					percent={75}
-					type={"service"}
-					label={"Label"}
-					direction={10.4}
-				/>
-				<BarBody
-					percent={25}
-					type={"service"}
-					label={"Label"}
-					direction={15}
-				/>
-				<BarBody
-					percent={28}
-					type={"service"}
-					label={"Label"}
-					direction={-15.4}
-				/>
-				<BarBody
-					percent={35}
-					type={"basic"}
-					label={"Label"}
-					direction={15.4}
-				/>
-				<BarBody
-					percent={100}
-					type={"service"}
-					label={"Label"}
-					direction={15}
-				/>
-				<BarBody
-					percent={25}
-					type={"service"}
-					label={"Label"}
-					direction={-15.4}
-				/>
-				<BarBody
-					percent={40}
-					type={"service"}
-					label={"Label"}
-					direction={55}
-				/>
-				<BarBody
-					percent={55}
-					type={"service"}
-					label={"Label"}
-					direction={15.4}
-				/>
-				<BarBody
-					percent={95}
-					type={"basic"}
-					label={"Label"}
-					direction={15}
-				/>
+				{
+					chosenNode ?
+						chartTree.map(node => <BarBody
+							key={node.label}
+							percent={node.value}
+							type={node.type.toLowerCase()}
+							label={node.label}
+							direction={-25.4}
+						/>)
+						: "No chosen nodes"
+				}
 			</section>
 
 		</div>
