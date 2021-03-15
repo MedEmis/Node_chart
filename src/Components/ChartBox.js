@@ -1,7 +1,8 @@
 import React, { forwardRef, useEffect, useRef, useState } from 'react'
 import BarBody from './BarBody'
 import { useChildren } from './../Hooks/useChildren';
-
+import { bounceIn } from 'react-animations';
+import Radium, { StyleRoot } from 'radium';
 
 const Dropdown = forwardRef(({ options, handler }, ref) => {
 	return (
@@ -29,6 +30,13 @@ const ChartBox = ({ node_data }) => {
 
 	const chartTree = useChildren(node_data, chosenNode)
 
+	const styles = {
+		bounce: {
+			animation: 'x 0.5s',
+			animationName: Radium.keyframes(bounceIn, 'bounce')
+		}
+	}
+
 	useEffect(() => {
 		getOptions(node_data)
 	}, [node_data])
@@ -50,17 +58,19 @@ const ChartBox = ({ node_data }) => {
 					<button className="chart-box__title_settings"></button>
 				</div>
 			</section>
-
 			<section className="chart-box__body">
 				{
 					chosenNode ?
-						chartTree.map(node => <BarBody
-							key={node.label}
-							percent={node.value}
-							type={node.type.toLowerCase()}
-							label={node.label}
-							direction={-25.4}
-						/>)
+						chartTree.map((node, index) => <StyleRoot key={index}>
+							<div style={styles.bounce} key={node.label}>
+								<BarBody
+									percent={node.value}
+									type={node.type.toLowerCase()}
+									label={node.label}
+									direction={-25.4}
+								/>
+							</div>
+						</StyleRoot>)
 						: "No chosen nodes"
 				}
 			</section>
