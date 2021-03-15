@@ -44,7 +44,7 @@ const ChartBox = ({ node_data }) => {
 				</div>
 				<div className="chart-box__title_column">
 					<button className="chart-box__title_branch" onClick={dropdownOpen}>
-						Choose branches
+						{chosenNode ?? "Choose branches"}
 						<Dropdown options={options} handler={dropdownHandler} ref={dropdown} />
 					</button>
 					<button className="chart-box__title_settings"></button>
